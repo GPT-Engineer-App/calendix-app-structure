@@ -19,153 +19,53 @@ const fromSupabase = async (query) => {
 
 /* supabase integration types
 
-### event
+// EXAMPLE TYPES SECTION
+// DO NOT USE TYPESCRIPT
 
-| name       | type        | format | required |
-|------------|-------------|--------|----------|
-| id         | int8        | number | true     |
-| name       | text        | string | true     |
-| created_at | timestamptz | string | true     |
-| date       | date        | string | true     |
+### foos
 
-### user
+| name    | type | format | required |
+|---------|------|--------|----------|
+| id      | int8 | number | true     |
+| title   | text | string | true     |
+| date    | date | string | true     |
 
-| name       | type        | format | required |
-|------------|-------------|--------|----------|
-| id         | int8        | number | true     |
-| email      | text        | string | true     |
-| created_at | timestamptz | string | true     |
+### bars
 
-### subscription
-
-| name       | type        | format | required |
-|------------|-------------|--------|----------|
-| id         | int8        | number | true     |
-| user_id    | int8        | number | true     |
-| plan       | text        | string | true     |
-| created_at | timestamptz | string | true     |
-
+| name    | type | format | required |
+|---------|------|--------|----------|
+| id      | int8 | number | true     |
+| foo_id  | int8 | number | true     |  // foreign key to foos
+	
 */
 
-// Hooks for event table
-export const useEvents = () => useQuery({
-    queryKey: ['events'],
-    queryFn: () => fromSupabase(supabase.from('event').select('*')),
-});
+// Example hook for models
 
-export const useEvent = (id) => useQuery({
-    queryKey: ['event', id],
-    queryFn: () => fromSupabase(supabase.from('event').select('*').eq('id', id).single()),
-});
-
-export const useAddEvent = () => {
+export const useFoo = ()=> useQuery({
+    queryKey: ['foos'],
+    queryFn: fromSupabase(supabase.from('foos')),
+})
+export const useAddFoo = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (newEvent) => fromSupabase(supabase.from('event').insert([newEvent])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('events');
+        mutationFn: (newFoo)=> fromSupabase(supabase.from('foos').insert([{ title: newFoo.title }])),
+        onSuccess: ()=> {
+            queryClient.invalidateQueries('foos');
         },
     });
 };
 
-export const useUpdateEvent = () => {
+export const useBar = ()=> useQuery({
+    queryKey: ['bars'],
+    queryFn: fromSupabase(supabase.from('bars')),
+})
+export const useAddBar = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (updatedEvent) => fromSupabase(supabase.from('event').update(updatedEvent).eq('id', updatedEvent.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('events');
+        mutationFn: (newBar)=> fromSupabase(supabase.from('bars').insert([{ foo_id: newBar.foo_id }])),
+        onSuccess: ()=> {
+            queryClient.invalidateQueries('bars');
         },
     });
 };
 
-export const useDeleteEvent = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('event').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('events');
-        },
-    });
-};
-
-// Hooks for user table
-export const useUsers = () => useQuery({
-    queryKey: ['users'],
-    queryFn: () => fromSupabase(supabase.from('user').select('*')),
-});
-
-export const useUser = (id) => useQuery({
-    queryKey: ['user', id],
-    queryFn: () => fromSupabase(supabase.from('user').select('*').eq('id', id).single()),
-});
-
-export const useAddUser = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (newUser) => fromSupabase(supabase.from('user').insert([newUser])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('users');
-        },
-    });
-};
-
-export const useUpdateUser = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (updatedUser) => fromSupabase(supabase.from('user').update(updatedUser).eq('id', updatedUser.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('users');
-        },
-    });
-};
-
-export const useDeleteUser = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('user').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('users');
-        },
-    });
-};
-
-// Hooks for subscription table
-export const useSubscriptions = () => useQuery({
-    queryKey: ['subscriptions'],
-    queryFn: () => fromSupabase(supabase.from('subscription').select('*')),
-});
-
-export const useSubscription = (id) => useQuery({
-    queryKey: ['subscription', id],
-    queryFn: () => fromSupabase(supabase.from('subscription').select('*').eq('id', id).single()),
-});
-
-export const useAddSubscription = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (newSubscription) => fromSupabase(supabase.from('subscription').insert([newSubscription])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('subscriptions');
-        },
-    });
-};
-
-export const useUpdateSubscription = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (updatedSubscription) => fromSupabase(supabase.from('subscription').update(updatedSubscription).eq('id', updatedSubscription.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('subscriptions');
-        },
-    });
-};
-
-export const useDeleteSubscription = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('subscription').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('subscriptions');
-        },
-    });
-};

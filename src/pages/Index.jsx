@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SignUpLoginModal from '../components/SignUpLoginModal';
 
@@ -7,6 +7,24 @@ const Index = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    const handlePostMessage = (event) => {
+      const allowedOrigins = ['http://localhost:3000', 'https://run.gptengineer.app'];
+      if (!allowedOrigins.includes(event.origin)) {
+        console.error(`Blocked postMessage from disallowed origin: ${event.origin}`);
+        return;
+      }
+      // Handle the message
+      console.log('Received message:', event.data);
+    };
+
+    window.addEventListener('message', handlePostMessage);
+
+    return () => {
+      window.removeEventListener('message', handlePostMessage);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/images/hero-background-new.jpg)' }}>

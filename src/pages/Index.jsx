@@ -15,7 +15,7 @@ const Index = () => {
         console.error(`Blocked postMessage from disallowed origin: ${event.origin}`);
         return;
       }
-      // Handle the message
+      // Log the received message
       console.log('Received message:', event.data);
     };
 

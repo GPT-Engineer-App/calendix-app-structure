@@ -11,8 +11,6 @@ const MainLayout = ({ children }) => {
         </div>
         <nav>
           <Link to="/" className="mr-4">Home</Link>
-          <Link to="/planner" className="mr-4">Planner</Link>
-          <Link to="/important-dates" className="mr-4">Important Dates</Link>
           <Link to="/calendar-import" className="mr-4">Import Calendar</Link>
         </nav>
       </header>

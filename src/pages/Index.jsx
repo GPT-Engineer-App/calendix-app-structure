@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SignUpLoginModal from '../components/SignUpLoginModal';
 
+import { useSupabaseAuth } from '../integrations/supabase/auth.jsx';
+
 const Index = () => {
+  const { session } = useSupabaseAuth();
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    if (session) {
+      navigate('/planner');
+    }
+  }, [session, navigate]);
 
   useEffect(() => {
     const handlePostMessage = (event) => {

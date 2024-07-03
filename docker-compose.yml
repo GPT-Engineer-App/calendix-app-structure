@@ -4,10 +4,9 @@ services:
   app:
     build: .
     ports:
-      - '3000:3000'
-    environment:
-      - VITE_SUPABASE_PROJECT_URL=${VITE_SUPABASE_PROJECT_URL}
-      - VITE_SUPABASE_API_KEY=${VITE_SUPABASE_API_KEY}
+      - '5173:5173'
     volumes:
       - .:/app
       - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true

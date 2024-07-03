@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useAddImportantDate } from '../integrations/supabase/index.js';
 
 const ImportantDates = ({ onClose }) => {
   const [dates, setDates] = useState([]);
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
+
+  const addImportantDate = useAddImportantDate();
 
   const handleAddDate = () => {
     setDates([...dates, { date, description }]);
@@ -11,8 +14,15 @@ const ImportantDates = ({ onClose }) => {
     setDescription('');
   };
 
-  const handleDone = () => {
-    // Save the important dates to the state or backend here
+  const handleDone = async () => {
+    // Save the important dates to the backend here
+    for (const d of dates) {
+      await addImportantDate.mutateAsync({
+        user_id: 1, // Replace with actual user ID
+        date: d.date,
+        description: d.description,
+      });
+    }
     onClose();
   };
 

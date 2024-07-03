@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSupabaseAuth } from '../integrations/supabase/auth.jsx';
+import { useLifestyleQuestions, useImportantDates, useAddLifestyleQuestion, useAddImportantDate } from '../integrations/supabase/index.js';
 import LifestylePrompt from './LifestylePrompt';
 import ImportantDates from './ImportantDates';
 import UserGoals from './UserGoals';
@@ -12,17 +13,22 @@ const Planner = () => {
   const [showCarousel, setShowCarousel] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
 
+  const { data: lifestyleQuestions, isLoading: isLoadingLifestyleQuestions } = useLifestyleQuestions();
+  const { data: importantDates, isLoading: isLoadingImportantDates } = useImportantDates();
+  const addLifestyleQuestion = useAddLifestyleQuestion();
+  const addImportantDate = useAddImportantDate();
+
   useEffect(() => {
     if (!session) {
       navigate('/signup');
     } else {
       // Check if the user has completed onboarding
-      const userOnboardingCompleted = false; // Replace with actual check
+      const userOnboardingCompleted = lifestyleQuestions?.length > 0 && importantDates?.length > 0;
       if (!userOnboardingCompleted) {
         setShowCarousel(true);
       }
     }
-  }, [session, navigate]);
+  }, [session, navigate, lifestyleQuestions, importantDates]);
 
   const handleNext = () => {
     setCarouselIndex((prevIndex) => prevIndex + 1);
@@ -36,6 +42,10 @@ const Planner = () => {
     setShowCarousel(false);
     // Save onboarding completion status
   };
+
+  if (isLoadingLifestyleQuestions || isLoadingImportantDates) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">

@@ -15,10 +15,13 @@ const Sidebar = ({ children }) => {
               <a href="/">Home</a>
             </li>
             <li className="px-4 py-2 hover:bg-gray-700">
-              <a href="/calendar-import">Import Calendar</a>
+              <a href="/signup">Sign Up</a>
             </li>
             <li className="px-4 py-2 hover:bg-gray-700">
-              <a href="/lifestyle-questions">Lifestyle Questions</a>
+              <a href="/lifestyle-prompt">Lifestyle Questions</a>
+            </li>
+            <li className="px-4 py-2 hover:bg-gray-700">
+              <a href="/calendar-import">Import Calendar</a>
             </li>
             <li className="px-4 py-2 hover:bg-gray-700">
               <a href="/important-dates">Important Dates</a>

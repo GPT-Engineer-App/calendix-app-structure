@@ -11,6 +11,7 @@ services:
       - .:/app
       - /app/node_modules
     command: npm start
+    test: ["CMD-SHELL", "curl -f https://planit-iota.vercel.app || exit 1"]
 
   nginx:
     image: nginx:latest

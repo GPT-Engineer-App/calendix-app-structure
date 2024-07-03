@@ -13,7 +13,7 @@ export const loadReportUrlChangeEventListener = () => {
       if (oldHref !== document.location.href) {
         oldHref = document.location.href;
         window.top.postMessage({ type: "URL_CHANGED", url: document.location.href }, "https://run.gptengineer.app");
-        window.top.postMessage({ type: "URL_CHANGED", url: document.location.href }, "http://localhost:3000");
+        window.top.postMessage({ type: "URL_CHANGED", url: document.location.href }, "https://planit-iota.vercel.app");
       }
     });
     observer.observe(body, { childList: true, subtree: true });

@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:18 AS build
+FROM node:14
 
 # Set the working directory
 WORKDIR /app
@@ -13,16 +13,16 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build the application
+# Build the React application
 RUN npm run build
 
-# Use an official Nginx runtime as a parent image
-FROM nginx:alpine
+# Install Nginx
+RUN apt-get update && apt-get install -y nginx
 
-# Copy the built application from the previous stage
-COPY --from=build /app/dist /usr/share/nginx/html
+# Remove the default Nginx configuration file
+RUN rm /etc/nginx/sites-enabled/default
 
-# Copy the Nginx configuration file
+# Copy the custom Nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80

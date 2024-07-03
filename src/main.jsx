@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <SupabaseAuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<App />}>
+            <Route path="*" element={<App />}>
               <Route index element={<Index />} />
             </Route>
           </Routes>

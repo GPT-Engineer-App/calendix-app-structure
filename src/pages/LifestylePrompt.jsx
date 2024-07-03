@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useAddLifestyleQuestion } from '../integrations/supabase/index.js';
 
 const LifestylePrompt = ({ onClose }) => {
   const [workingHours, setWorkingHours] = useState('');
   const [commuteTime, setCommuteTime] = useState('');
   const [readingSpeed, setReadingSpeed] = useState('');
 
-  const handleNext = () => {
-    // Save the lifestyle details to the state or backend here
+  const addLifestyleQuestion = useAddLifestyleQuestion();
+
+  const handleNext = async () => {
+    // Save the lifestyle details to the backend here
+    await addLifestyleQuestion.mutateAsync({
+      user_id: 1, // Replace with actual user ID
+      working_hours: workingHours,
+      commute_time: commuteTime,
+      reading_speed: readingSpeed,
+    });
     onClose();
   };
 

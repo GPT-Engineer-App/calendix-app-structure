@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../integrations/supabase';
-import { SupabaseAuthUI } from '../integrations/supabase/auth.jsx';
+import { SupabaseAuthUI, useSupabaseAuth } from '../integrations/supabase/auth.jsx';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +9,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { session } = useSupabaseAuth();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -30,6 +31,10 @@ const SignUp = () => {
       navigate('/email-verification');
     }
   };
+
+  if (session) {
+    navigate('/planner');
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSupabaseAuth } from '../integrations/supabase/auth.jsx';
 import LifestylePrompt from './LifestylePrompt';
 import ImportantDates from './ImportantDates';
@@ -6,19 +7,22 @@ import UserGoals from './UserGoals';
 
 const Planner = () => {
   const { session } = useSupabaseAuth();
+  const navigate = useNavigate();
   const [showLifestylePrompt, setShowLifestylePrompt] = useState(false);
   const [showImportantDates, setShowImportantDates] = useState(false);
   const [showUserGoals, setShowUserGoals] = useState(false);
 
   useEffect(() => {
-    if (session) {
+    if (!session) {
+      navigate('/signup');
+    } else {
       // Check if the user has completed onboarding
       const userOnboardingCompleted = false; // Replace with actual check
       if (!userOnboardingCompleted) {
         setShowLifestylePrompt(true);
       }
     }
-  }, [session]);
+  }, [session, navigate]);
 
   const handleLifestylePromptClose = () => {
     setShowLifestylePrompt(false);

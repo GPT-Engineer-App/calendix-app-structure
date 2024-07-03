@@ -1,10 +1,8 @@
-version: '3.8'
+version: '3'
 
 services:
-  cal-1:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  app:
+    build: .
     ports:
       - "3000:3000"
     environment:
@@ -12,13 +10,13 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run dev
+    command: npm start
 
   nginx:
-    image: nginx:alpine
+    image: nginx:latest
     ports:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
-      - cal-1
+      - app

@@ -10,8 +10,7 @@ const Index = () => {
 
   useEffect(() => {
     const handlePostMessage = (event) => {
-      const allowedOrigins = ['https://preview-2258c8b3--calendix-app-structure.gptengineer.run', 'https://run.gptengineer.app'];
-      if (!allowedOrigins.includes(event.origin)) {
+      if (event.origin !== 'https://planit-iota.vercel.app') {
         console.error(`Blocked postMessage from disallowed origin: ${event.origin}`);
         return;
       }

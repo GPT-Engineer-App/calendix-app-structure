@@ -21,7 +21,7 @@ const SignUp = () => {
       email,
       password,
     }, {
-      redirectTo: `${window.location.origin}/email-verification`
+      redirectTo: `https://planit-iota.vercel.app/email-verification`
     });
 
     if (error) {

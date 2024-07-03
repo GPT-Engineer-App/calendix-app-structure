@@ -6,12 +6,13 @@ import CalendarImport from './pages/CalendarImport';
 import ImportantDates from './pages/ImportantDates';
 import Planner from './pages/Planner';
 import { useSupabaseAuth } from './integrations/supabase/auth.jsx';
+import MainLayout from './layouts/MainLayout'; // Import MainLayout
 
 function App() {
   const { session } = useSupabaseAuth();
 
   return (
-    <div className="flex-1 p-10 bg-gray-100">
+    <MainLayout> {/* Wrap Routes with MainLayout */}
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/signup" element={<SignUp />} />
@@ -20,7 +21,7 @@ function App() {
         <Route path="/important-dates" element={session ? <ImportantDates /> : <Navigate to="/signup" />} />
         <Route path="/planner" element={session ? <Planner /> : <Navigate to="/signup" />} />
       </Routes>
-    </div>
+    </MainLayout>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../integrations/supabase';
+import { SupabaseAuthUI } from '../integrations/supabase/auth.jsx';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold mb-8">Sign Up</h1>
+      <h1 className="text-4xl font-bold mb-8">Sign Up / Login</h1>
       <form className="bg-white p-8 rounded-lg shadow-md w-full max-w-md" onSubmit={handleSignUp}>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
@@ -74,11 +75,14 @@ const SignUp = () => {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg w-full"
+          className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg w-full mb-4"
         >
           Create Account
         </button>
       </form>
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mt-4">
+        <SupabaseAuthUI />
+      </div>
     </div>
   );
 };

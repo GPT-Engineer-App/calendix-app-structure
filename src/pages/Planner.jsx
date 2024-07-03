@@ -5,12 +5,12 @@ import LifestylePrompt from './LifestylePrompt';
 import ImportantDates from './ImportantDates';
 import UserGoals from './UserGoals';
 
+
 const Planner = () => {
   const { session } = useSupabaseAuth();
   const navigate = useNavigate();
-  const [showLifestylePrompt, setShowLifestylePrompt] = useState(false);
-  const [showImportantDates, setShowImportantDates] = useState(false);
-  const [showUserGoals, setShowUserGoals] = useState(false);
+  const [showCarousel, setShowCarousel] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
 
   useEffect(() => {
     if (!session) {
@@ -19,23 +19,21 @@ const Planner = () => {
       // Check if the user has completed onboarding
       const userOnboardingCompleted = false; // Replace with actual check
       if (!userOnboardingCompleted) {
-        setShowLifestylePrompt(true);
+        setShowCarousel(true);
       }
     }
   }, [session, navigate]);
 
-  const handleLifestylePromptClose = () => {
-    setShowLifestylePrompt(false);
-    setShowImportantDates(true);
+  const handleNext = () => {
+    setCarouselIndex((prevIndex) => prevIndex + 1);
   };
 
-  const handleImportantDatesClose = () => {
-    setShowImportantDates(false);
-    setShowUserGoals(true);
+  const handlePrev = () => {
+    setCarouselIndex((prevIndex) => prevIndex - 1);
   };
 
-  const handleUserGoalsClose = () => {
-    setShowUserGoals(false);
+  const handleFinish = () => {
+    setShowCarousel(false);
     // Save onboarding completion status
   };
 
@@ -46,9 +44,26 @@ const Planner = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
         {/* Planner content goes here */}
       </div>
-      {showLifestylePrompt && <LifestylePrompt onClose={handleLifestylePromptClose} />}
-      {showImportantDates && <ImportantDates onClose={handleImportantDatesClose} />}
-      {showUserGoals && <UserGoals onClose={handleUserGoalsClose} />}
+      {showCarousel && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+            <div className="flex justify-between mb-4">
+              <span className={`breadcrumb-item ${carouselIndex === 0 ? 'font-bold' : ''}`}>Lifestyle Questions</span>
+              <span className={`breadcrumb-item ${carouselIndex === 1 ? 'font-bold' : ''}`}>Important Dates</span>
+              <span className={`breadcrumb-item ${carouselIndex === 2 ? 'font-bold' : ''}`}>Your Goals</span>
+            </div>
+            <div className="carousel">
+              {carouselIndex === 0 && <LifestylePrompt onClose={handleNext} />}
+              {carouselIndex === 1 && <ImportantDates onClose={handleNext} />}
+              {carouselIndex === 2 && <UserGoals onClose={handleFinish} />}
+            </div>
+            <div className="flex justify-between mt-4">
+              {carouselIndex > 0 && <button onClick={handlePrev} className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg">Previous</button>}
+              {carouselIndex < 2 && <button onClick={handleNext} className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg">Next</button>}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

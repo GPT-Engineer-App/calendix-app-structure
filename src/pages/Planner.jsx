@@ -5,6 +5,8 @@ import { useLifestyleQuestions, useImportantDates, useAddLifestyleQuestion, useA
 import LifestylePrompt from './LifestylePrompt';
 import ImportantDates from './ImportantDates';
 import UserGoals from './UserGoals';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 
 const Planner = () => {
@@ -52,7 +54,7 @@ const Planner = () => {
       <h1 className="text-4xl font-bold mb-8">Your Yearly Planner</h1>
       <p className="text-xl mb-8">Explore your schedule and manage your events.</p>
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
-        {/* Planner content goes here */}
+        <Calendar view="year" />
       </div>
       {showCarousel && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

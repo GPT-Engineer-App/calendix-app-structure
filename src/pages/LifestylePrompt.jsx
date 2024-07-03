@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LifestylePrompt = () => {
+const LifestylePrompt = ({ onClose }) => {
   const [workingHours, setWorkingHours] = useState('');
   const [commuteTime, setCommuteTime] = useState('');
   const [readingSpeed, setReadingSpeed] = useState('');
-  const navigate = useNavigate();
 
   const handleNext = () => {
     // Save the lifestyle details to the state or backend here
-    navigate('/calendar-import');
+    onClose();
   };
 
   return (

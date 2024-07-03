@@ -24,31 +24,31 @@ const fromSupabase = async (query) => {
 | name       | type        | format | required |
 |------------|-------------|--------|----------|
 | id         | int8        | number | true     |
-| user_id    | int8        | number | false    |
+| user_id    | int8        | number | true     |
 | date       | date        | string | true     |
 | description| text        | string | true     |
-| created_at | timestamptz | string | false    |
+| created_at | timestamptz | string | true     |
 
 ### lifestyle_questions
 
 | name          | type        | format | required |
 |---------------|-------------|--------|----------|
 | id            | int8        | number | true     |
-| user_id       | int8        | number | false    |
+| user_id       | int8        | number | true     |
 | working_hours | text        | string | true     |
 | commute_time  | text        | string | true     |
 | reading_speed | text        | string | true     |
-| created_at    | timestamptz | string | false    |
+| created_at    | timestamptz | string | true     |
 
 ### events
 
 | name       | type        | format | required |
 |------------|-------------|--------|----------|
 | id         | int8        | number | true     |
-| user_id    | int8        | number | false    |
+| user_id    | int8        | number | true     |
 | name       | text        | string | true     |
 | date       | date        | string | true     |
-| created_at | timestamptz | string | false    |
+| created_at | timestamptz | string | true     |
 
 ### users
 
@@ -56,16 +56,16 @@ const fromSupabase = async (query) => {
 |------------|-------------|--------|----------|
 | id         | int8        | number | true     |
 | email      | text        | string | true     |
-| created_at | timestamptz | string | false    |
+| created_at | timestamptz | string | true     |
 
 ### planner
 
 | name       | type        | format | required |
 |------------|-------------|--------|----------|
 | id         | int8        | number | true     |
-| user_id    | int8        | number | false    |
+| user_id    | int8        | number | true     |
 | content    | text        | string | true     |
-| created_at | timestamptz | string | false    |
+| created_at | timestamptz | string | true     |
 
 */
 

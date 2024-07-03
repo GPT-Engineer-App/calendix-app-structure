@@ -10,7 +10,7 @@ const Index = () => {
 
   useEffect(() => {
     const handlePostMessage = (event) => {
-      const allowedOrigins = ['http://localhost:3000', 'https://run.gptengineer.app'];
+      const allowedOrigins = ['https://preview-2258c8b3--calendix-app-structure.gptengineer.run', 'https://run.gptengineer.app'];
       if (!allowedOrigins.includes(event.origin)) {
         console.error(`Blocked postMessage from disallowed origin: ${event.origin}`);
         return;

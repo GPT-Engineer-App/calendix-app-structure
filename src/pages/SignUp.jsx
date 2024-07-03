@@ -20,6 +20,8 @@ const SignUp = () => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
+    }, {
+      redirectTo: `${window.location.origin}/email-verification`
     });
 
     if (error) {

@@ -19,232 +19,53 @@ const fromSupabase = async (query) => {
 
 /* supabase integration types
 
-### important_dates
+// EXAMPLE TYPES SECTION
+// DO NOT USE TYPESCRIPT
 
-| name       | type        | format | required |
-|------------|-------------|--------|----------|
-| id         | int8        | number | true     |
-| user_id    | int8        | number | false    |
-| date       | date        | string | true     |
-| description| text        | string | true     |
-| created_at | timestamptz | string | false    |
+### foos
 
-### lifestyle_questions
+| name    | type | format | required |
+|---------|------|--------|----------|
+| id      | int8 | number | true     |
+| title   | text | string | true     |
+| date    | date | string | true     |
 
-| name          | type        | format | required |
-|---------------|-------------|--------|----------|
-| id            | int8        | number | true     |
-| user_id       | int8        | number | false    |
-| working_hours | text        | string | true     |
-| commute_time  | text        | string | true     |
-| reading_speed | text        | string | true     |
-| created_at    | timestamptz | string | false    |
+### bars
 
-### events
-
-| name       | type        | format | required |
-|------------|-------------|--------|----------|
-| id         | int8        | number | true     |
-| user_id    | int8        | number | false    |
-| name       | text        | string | true     |
-| date       | date        | string | true     |
-| created_at | timestamptz | string | false    |
-
-### users
-
-| name       | type        | format | required |
-|------------|-------------|--------|----------|
-| id         | int8        | number | true     |
-| email      | text        | string | true     |
-| created_at | timestamptz | string | false    |
-
-### planner
-
-| name       | type        | format | required |
-|------------|-------------|--------|----------|
-| id         | int8        | number | true     |
-| user_id    | int8        | number | false    |
-| content    | text        | string | true     |
-| created_at | timestamptz | string | false    |
-
+| name    | type | format | required |
+|---------|------|--------|----------|
+| id      | int8 | number | true     |
+| foo_id  | int8 | number | true     |  // foreign key to foos
+	
 */
 
-// Hooks for important_dates
-export const useImportantDates = () => useQuery({
-    queryKey: ['important_dates'],
-    queryFn: () => fromSupabase(supabase.from('important_dates').select('*')),
-});
+// Example hook for models
 
-export const useAddImportantDate = () => {
+export const useFoo = ()=> useQuery({
+    queryKey: ['foos'],
+    queryFn: fromSupabase(supabase.from('foos')),
+})
+export const useAddFoo = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (newDate) => fromSupabase(supabase.from('important_dates').insert([newDate])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('important_dates');
+        mutationFn: (newFoo)=> fromSupabase(supabase.from('foos').insert([{ title: newFoo.title }])),
+        onSuccess: ()=> {
+            queryClient.invalidateQueries('foos');
         },
     });
 };
 
-export const useUpdateImportantDate = () => {
+export const useBar = ()=> useQuery({
+    queryKey: ['bars'],
+    queryFn: fromSupabase(supabase.from('bars')),
+})
+export const useAddBar = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (updatedDate) => fromSupabase(supabase.from('important_dates').update(updatedDate).eq('id', updatedDate.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('important_dates');
+        mutationFn: (newBar)=> fromSupabase(supabase.from('bars').insert([{ foo_id: newBar.foo_id }])),
+        onSuccess: ()=> {
+            queryClient.invalidateQueries('bars');
         },
     });
 };
 
-export const useDeleteImportantDate = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('important_dates').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('important_dates');
-        },
-    });
-};
-
-// Hooks for lifestyle_questions
-export const useLifestyleQuestions = () => useQuery({
-    queryKey: ['lifestyle_questions'],
-    queryFn: () => fromSupabase(supabase.from('lifestyle_questions').select('*')),
-});
-
-export const useAddLifestyleQuestion = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (newQuestion) => fromSupabase(supabase.from('lifestyle_questions').insert([newQuestion])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('lifestyle_questions');
-        },
-    });
-};
-
-export const useUpdateLifestyleQuestion = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (updatedQuestion) => fromSupabase(supabase.from('lifestyle_questions').update(updatedQuestion).eq('id', updatedQuestion.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('lifestyle_questions');
-        },
-    });
-};
-
-export const useDeleteLifestyleQuestion = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('lifestyle_questions').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('lifestyle_questions');
-        },
-    });
-};
-
-// Hooks for events
-export const useEvents = () => useQuery({
-    queryKey: ['events'],
-    queryFn: () => fromSupabase(supabase.from('events').select('*')),
-});
-
-export const useAddEvent = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (newEvent) => fromSupabase(supabase.from('events').insert([newEvent])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('events');
-        },
-    });
-};
-
-export const useUpdateEvent = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (updatedEvent) => fromSupabase(supabase.from('events').update(updatedEvent).eq('id', updatedEvent.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('events');
-        },
-    });
-};
-
-export const useDeleteEvent = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('events').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('events');
-        },
-    });
-};
-
-// Hooks for users
-export const useUsers = () => useQuery({
-    queryKey: ['users'],
-    queryFn: () => fromSupabase(supabase.from('users').select('*')),
-});
-
-export const useAddUser = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (newUser) => fromSupabase(supabase.from('users').insert([newUser])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('users');
-        },
-    });
-};
-
-export const useUpdateUser = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (updatedUser) => fromSupabase(supabase.from('users').update(updatedUser).eq('id', updatedUser.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('users');
-        },
-    });
-};
-
-export const useDeleteUser = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('users').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('users');
-        },
-    });
-};
-
-// Hooks for planner
-export const usePlanner = () => useQuery({
-    queryKey: ['planner'],
-    queryFn: () => fromSupabase(supabase.from('planner').select('*')),
-});
-
-export const useAddPlanner = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (newPlanner) => fromSupabase(supabase.from('planner').insert([newPlanner])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('planner');
-        },
-    });
-};
-
-export const useUpdatePlanner = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (updatedPlanner) => fromSupabase(supabase.from('planner').update(updatedPlanner).eq('id', updatedPlanner.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('planner');
-        },
-    });
-};
-
-export const useDeletePlanner = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('planner').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('planner');
-        },
-    });
-};

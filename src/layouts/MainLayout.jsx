@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const MainLayout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
@@ -9,10 +8,6 @@ const MainLayout = ({ children }) => {
           <img src="/logo.png" alt="PlanIt Logo" className="h-8 w-8 mr-2" />
           <h1 className="text-2xl font-bold">PlanIt</h1>
         </div>
-        <nav>
-          <Link to="/" className="mr-4">Home</Link>
-          <Link to="/calendar-import" className="mr-4">Import Calendar</Link>
-        </nav>
       </header>
       <main className="flex-1 p-10 bg-gray-100">
         {children}

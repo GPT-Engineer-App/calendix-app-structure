@@ -21,8 +21,8 @@ const Index = () => {
   
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/images/hero-background-new.jpg)' }}>
-      <h1 className="text-5xl font-bold mb-8 gradient-text">Welcome to PlanIt</h1>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <h1 className="text-5xl font-bold mb-8 text-blue-600">Welcome to PlanIt</h1>
       <p className="text-xl mb-8">Your ultimate calendar and lifestyle management tool.</p>
       <button onClick={openModal} className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg">Sign Up / Login</button>
       <SignUpLoginModal isOpen={isModalOpen} onClose={closeModal} />

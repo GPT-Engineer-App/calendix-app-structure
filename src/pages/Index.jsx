@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignUpLoginModal from '../components/SignUpLoginModal';
 import { useSupabaseAuth } from '../integrations/supabase/auth.jsx';
-import heroImage from '../../public/images/hero-image.jpg';
+import heroImage from '../../public/images/hero-background-new.jpg'; // Updated path
 
 const Index = () => {
   const { session } = useSupabaseAuth();

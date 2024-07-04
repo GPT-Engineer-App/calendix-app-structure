@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '@shadcn/ui';
 import heroImage from '../../public/images/hero-image.jpg';
 
 const Index = () => {
@@ -11,7 +10,7 @@ const Index = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
             <h1 className="text-5xl font-bold text-white mb-4">Effortlessly organize your schedule</h1>
             <p className="text-xl text-white mb-8">Utilize digital calendars or scheduling apps to keep track of your appointments, deadlines, and events.</p>
-            <Button className="bg-purple-500 text-white px-6 py-3 rounded-lg text-lg">Get started</Button>
+            <button className="bg-purple-500 text-white px-6 py-3 rounded-lg text-lg">Get started</button>
           </div>
         </section>
 
@@ -19,7 +18,7 @@ const Index = () => {
           <div className="container mx-auto text-center">
             <h3 className="text-4xl font-bold mb-8">Smarter scheduling for your work</h3>
             <p className="text-xl mb-8">Optimize your work schedule and maximize productivity with our AI-powered insights and recommendations.</p>
-            <Button className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg">Learn more</Button>
+            <button className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg">Learn more</button>
           </div>
         </section>
 
@@ -27,7 +26,7 @@ const Index = () => {
           <div className="container mx-auto text-center">
             <h3 className="text-4xl font-bold mb-8">Share your schedule with everyone</h3>
             <p className="text-xl mb-8">Seamlessly share your schedule with family, friends, and colleagues. Our tool makes collaboration and coordination a breeze.</p>
-            <Button className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg">Learn more</Button>
+            <button className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg">Learn more</button>
           </div>
         </section>
 
@@ -35,7 +34,7 @@ const Index = () => {
           <div className="container mx-auto text-center">
             <h3 className="text-4xl font-bold mb-8">Get started!</h3>
             <p className="text-xl mb-8">Unlock the full potential of our tool and start achieving your goals today. Sign up now and experience the difference of intelligent, personalized scheduling.</p>
-            <Button className="bg-purple-500 text-white px-6 py-3 rounded-lg text-lg">Sign up</Button>
+            <button className="bg-purple-500 text-white px-6 py-3 rounded-lg text-lg">Sign up</button>
           </div>
         </section>
 

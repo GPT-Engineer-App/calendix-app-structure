@@ -1,32 +1,28 @@
 import React from 'react';
 
+import headerImage from '../../public/images/header-image.jpg';
+import footerImage from '../../public/images/footer-image.jpg';
+
 const MainLayout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <header className="bg-blue-600 text-white p-4">
-        <div className="container mx-auto">
-          <h1 className="text-2xl font-bold">PlanIt</h1>
+      <header className="relative w-full h-64">
+        <img src={headerImage} alt="Header" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+          <h1 className="text-4xl font-bold text-white mb-2">Achieve your long-term goals</h1>
+          <p className="text-lg text-white">Learn More: CalendIX's AI-powered goal tracking system</p>
         </div>
       </header>
       <main className="flex-1 p-10 bg-gray-100">
         {children}
       </main>
-      <footer className="bg-blue-600 text-white p-4 text-center">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <h4 className="text-xl font-bold mb-2">About Us</h4>
-            <p>Learn more about our mission and values.</p>
-          </div>
-          <div>
-            <h4 className="text-xl font-bold mb-2">Contact</h4>
-            <p>Get in touch with us for any queries or support.</p>
-          </div>
-          <div>
-            <h4 className="text-xl font-bold mb-2">Follow Us</h4>
-            <p>Stay updated with our latest news and updates.</p>
-          </div>
+      <footer className="relative w-full h-64">
+        <img src={footerImage} alt="Footer" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+          <h4 className="text-2xl font-bold text-white mb-2">Share your journey with loved ones</h4>
+          <p className="text-lg text-white">Learn More: CalendIX makes it easy to share your goals</p>
         </div>
-        <div className="container mx-auto mt-4">
+        <div className="container mx-auto mt-4 text-center text-white">
           <p>&copy; 2023 PlanIt. All rights reserved.</p>
         </div>
       </footer>

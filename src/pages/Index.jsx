@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignUpLoginModal from '../components/SignUpLoginModal';
 import { useSupabaseAuth } from '../integrations/supabase/auth.jsx';
-import heroImage from '../../public/images/hero-image.jpg';
+import heroImage from '../../public/images/hero-image-updated.jpg';
 
 const Index = () => {
   const { session } = useSupabaseAuth();
@@ -22,7 +22,7 @@ const Index = () => {
     <div className="flex flex-col items-center justify-center bg-gray-100">
       <main className="w-full flex flex-col items-center">
         <section className="relative w-full h-screen">
-          <img src={heroImage} alt="New Hero" className="w-full h-full object-cover" />
+          <img src={heroImage} alt="Hero" className="w-full h-full object-cover" />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 p-4">
             <h2 className="text-5xl font-bold text-white mb-4 text-center">Effortlessly organize your schedule</h2>
             <p className="text-xl text-white mb-8 text-center">Utilize digital calendars or scheduling apps to keep track of your appointments, deadlines, and events.</p>

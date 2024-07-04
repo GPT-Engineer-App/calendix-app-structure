@@ -20,8 +20,6 @@ const Index = () => {
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100">
-      
-
       <main className="w-full flex flex-col items-center">
         <section className="relative w-full h-screen">
           <img src={heroImage} alt="New Hero" className="w-full h-full object-cover" />
@@ -92,8 +90,6 @@ const Index = () => {
           </div>
         </section>
       </main>
-
-      
 
       <SignUpLoginModal isOpen={isModalOpen} onClose={closeModal} />
     </div>

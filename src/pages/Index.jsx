@@ -27,7 +27,7 @@ const Index = () => {
           <img src={heroImage} alt="Hero" className="w-full h-full object-cover" />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
             <h2 className="text-5xl font-bold text-white mb-4">Effortlessly organize your schedule</h2>
-            <p className="text-xl text-white mb-8">Introducing CalendIX, the smart yearly planner that adapts to your lifestyle. Say goodbye to scheduling conflicts and hello to a more organized, productive you!</p>
+            <p className="text-xl text-white mb-8">Utilize digital calendars or scheduling apps to keep track of your appointments, deadlines, and events.</p>
             <button onClick={openModal} className="bg-purple-500 text-white px-6 py-3 rounded-lg text-lg">Get started</button>
           </div>
         </section>

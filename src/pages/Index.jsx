@@ -24,7 +24,7 @@ const Index = () => {
 
       <main className="w-full flex flex-col items-center">
         <section className="relative w-full h-screen">
-          <img src={heroImage} alt="Hero" className="w-full h-full object-cover" />
+          <img src={heroImage} alt="New Hero" className="w-full h-full object-cover" />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
             <h2 className="text-5xl font-bold text-white mb-4">Effortlessly organize your schedule</h2>
             <p className="text-xl text-white mb-8">Utilize digital calendars or scheduling apps to keep track of your appointments, deadlines, and events.</p>

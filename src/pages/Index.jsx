@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SignUpLoginModal from '../components/SignUpLoginModal';
 import { useSupabaseAuth } from '../integrations/supabase/auth.jsx';
+import heroImage from '../../public/images/hero-image.jpg';
 
 const Index = () => {
   const { session } = useSupabaseAuth();
@@ -19,21 +20,16 @@ const Index = () => {
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100">
-      <header className="w-full bg-white shadow">
-        <div className="container mx-auto flex justify-between items-center p-4">
-          <h1 className="text-2xl font-bold text-blue-600">CalendIX</h1>
-          <div>
-            <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2">Sign In</button>
-            <button onClick={openModal} className="bg-purple-500 text-white px-4 py-2 rounded-lg">Sign Up</button>
-          </div>
-        </div>
-      </header>
+      
 
       <main className="w-full flex flex-col items-center">
-        <section className="text-center py-16">
-          <h2 className="text-5xl font-bold mb-4">Effortlessly organize your schedule</h2>
-          <p className="text-xl mb-8">Introducing CalendIX, the smart yearly planner that adapts to your lifestyle. Say goodbye to scheduling conflicts and hello to a more organized, productive you!</p>
-          <button onClick={openModal} className="bg-purple-500 text-white px-6 py-3 rounded-lg text-lg">Get started</button>
+        <section className="relative w-full h-screen">
+          <img src={heroImage} alt="Hero" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+            <h2 className="text-5xl font-bold text-white mb-4">Effortlessly organize your schedule</h2>
+            <p className="text-xl text-white mb-8">Introducing CalendIX, the smart yearly planner that adapts to your lifestyle. Say goodbye to scheduling conflicts and hello to a more organized, productive you!</p>
+            <button onClick={openModal} className="bg-purple-500 text-white px-6 py-3 rounded-lg text-lg">Get started</button>
+          </div>
         </section>
 
         <section className="w-full bg-gray-200 py-16">
@@ -97,11 +93,7 @@ const Index = () => {
         </section>
       </main>
 
-      <footer className="w-full bg-white shadow py-8">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2023 CalendIX. All rights reserved.</p>
-        </div>
-      </footer>
+      
 
       <SignUpLoginModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
